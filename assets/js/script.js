@@ -3,8 +3,15 @@ window.addEventListener('load', () => {
   document.querySelectorAll('.sbar-fill').forEach(el => {
     el.style.width = (el.dataset.w || 0) + '%';
   });
-});
 
+  // AUTO HILANGIN INTRO (BIAR GA STUCK)
+  const intro = document.getElementById('intro');
+  if (intro) {
+    setTimeout(() => {
+      intro.style.display = 'none';
+    }, 2000);
+  }
+});
 
 
 // ===== PORTFOLIO FOLDER DATA =====
@@ -25,8 +32,8 @@ const folderData = {
     thumb: '#fce4ec',
     btn: '#e91e8c',
     projects: [
-      { icon: '🎨', title: 'Poster Kegiatan Sekolah', desc: 'Desain poster untuk kegiatan class meeting menggunakan Canva dengan konsep modern.', link: 'https://drive.google.com' },
-      { icon: '✏️', title: 'Flyer Promosi Bazar', desc: 'Desain flyer digital untuk acara bazar sekolah menggunakan Canva.', link: 'https://drive.google.com' }
+      { icon: '🎨', title: 'Poster Kegiatan Sekolah', desc: 'Desain poster untuk kegiatan class meeting menggunakan Canva.', link: 'https://drive.google.com' },
+      { icon: '✏️', title: 'Flyer Promosi Bazar', desc: 'Desain flyer digital untuk acara bazar sekolah.', link: 'https://drive.google.com' }
     ]
   },
   presentasi: {
@@ -35,7 +42,7 @@ const folderData = {
     thumb: '#fff3e0',
     btn: '#f57c00',
     projects: [
-      { icon: '📊', title: 'Slide Presentasi PKK', desc: 'Materi presentasi mata pelajaran PKK menggunakan PowerPoint dengan layout yang rapi dan informatif.', link: 'https://drive.google.com' }
+      { icon: '📊', title: 'Slide Presentasi PKK', desc: 'Materi presentasi menggunakan PowerPoint.', link: 'https://drive.google.com' }
     ]
   }
 };
@@ -44,6 +51,7 @@ function openFolder(key) {
   const d = folderData[key];
   document.getElementById('detailDot').style.background = d.dot;
   document.getElementById('detailName').textContent = d.name;
+
   document.getElementById('projectsList').innerHTML = d.projects.map(p => `
     <div class="project-row">
       <div class="project-thumb" style="background:${d.thumb}">
@@ -52,33 +60,39 @@ function openFolder(key) {
       <div>
         <div class="project-title">${p.title}</div>
         <div class="project-desc">${p.desc}</div>
-        <a class="project-link" href="${p.link}" target="_blank" style="background:${d.btn}">↗ Lihat di Drive</a>
+        <a class="project-link" href="${p.link}" target="_blank" style="background:${d.btn}">
+          ↗ Lihat di Drive
+        </a>
       </div>
     </div>
   `).join('');
+
   document.getElementById('detailPanel').classList.add('open');
-  document.getElementById('detailPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  document.getElementById('detailPanel').scrollIntoView({ behavior: 'smooth' });
 }
 
 function closeFolder() {
   document.getElementById('detailPanel').classList.remove('open');
 }
+
+
 // ===== NAVBAR ACTIVE =====
 const navLinks = document.querySelectorAll('nav a');
 const sections = document.querySelectorAll('section[id]');
+
 window.addEventListener('scroll', () => {
   let cur = '';
   sections.forEach(s => {
     if (window.scrollY >= s.offsetTop - 120) cur = s.id;
   });
+
   navLinks.forEach(a => {
     a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
   });
 });
 
-// ===== FOTO PENDIDIKAN =====
-const ROT = ['-4deg','3.5deg','-2.5deg'];
 
+// ===== OVERLAY =====
 function openOverlay(id) {
   document.getElementById(id).classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -87,30 +101,66 @@ function openOverlay(id) {
 function closeOverlay(id) {
   document.getElementById(id).classList.remove('active');
   document.body.style.overflow = '';
-} 
+}
+
+
+// ===== FOTO PENDIDIKAN =====
+const ROT = ['-4deg','3.5deg','-2.5deg'];
 
 const photos = {
-  TK:  ['assets/images/tk1.jpeg', 'assets/images/tk1.jpeg', 'assets/images/tk2.jpeg'],
-  SD:  ['assets/images/sd1.jpeg', 'assets/images/sd1.jpeg', 'assets/images/sd2.jpeg'],
-  SMP: ['assets/images/smp1.jpeg', 'assets/images/smp1.jpeg', 'assets/images/smp2.jpeg'],
-  SMK: ['assets/images/smk1.jpeg', 'assets/images/smk1.jpeg', 'assets/images/smk2.jpeg'],
+  TK:  ['assets/images/tk1.jpeg','assets/images/tk2.jpeg'],
+  SD:  ['assets/images/sd1.jpeg','assets/images/sd2.jpeg'],
+  SMP: ['assets/images/smp1.jpeg','assets/images/smp2.jpeg'],
+  SMK: ['assets/images/smk1.jpeg','assets/images/smk2.jpeg'],
 };
+
+function openEduOverlay(level, school, year) {
   const row = document.getElementById('edu-polaroid-row');
+
+  if (!row) {
+    console.error("Container tidak ditemukan!");
+    return;
+  }
+
   document.getElementById('edu-overlay-label').textContent = `📷 galeri — ${year}`;
   document.getElementById('edu-overlay-title').textContent = `Foto ${level} — ${school}`;
 
   row.innerHTML = '';
+
+  if (!photos[level]) {
+    console.error("Level tidak ditemukan:", level);
+    return;
+  }
+
   photos[level].forEach((src, i) => {
     row.innerHTML += `
       <div class="polaroid" style="--rot:${ROT[i]};--delay:${i * 0.08}s">
-        <img src="${src}" style="width:180px;height:180px;object-fit:cover;display:block;">
+        <img src="${src}" style="width:180px;height:180px;object-fit:cover;">
         <div class="polaroid-caption">Foto ${level} ${i+1}</div>
-      </div>`;
+      </div>
+    `;
   });
 
   openOverlay('edu-overlay');
+}
 
 
+// ===== OVERLAY CLOSE EVENT =====
+document.querySelectorAll('.photo-overlay').forEach(el => {
+  el.addEventListener('click', e => {
+    if (e.target === el) closeOverlay(el.id);
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeOverlay('family-overlay');
+    closeOverlay('edu-overlay');
+  }
+});
+
+
+// ===== OPEN FAMILY =====
 function openFamily() {
   openOverlay('family-overlay');
 }
