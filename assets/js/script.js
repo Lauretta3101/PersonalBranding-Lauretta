@@ -75,3 +75,44 @@ window.addEventListener('scroll', () => {
     a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
   });
 });
+
+// ===== FOTO PENDIDIKAN =====
+const ROT = ['-4deg','3.5deg','-2.5deg'];
+
+function openOverlay(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOverlay(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function openEduOverlay(level, school, year) {
+  const photos = {
+    TK:  ['assets/images/tk-1.jpg',  'assets/images/tk-2.jpg',  'assets/images/tk-3.jpg'],
+    SD:  ['assets/images/sd-1.jpg',  'assets/images/sd-2.jpg',  'assets/images/sd-3.jpg'],
+    SMP: ['assets/images/smp-1.jpg', 'assets/images/smp-2.jpg', 'assets/images/smp-3.jpg'],
+    SMK: ['assets/images/smk-1.jpg', 'assets/images/smk-2.jpg', 'assets/images/smk-3.jpg'],
+  };
+
+  const row = document.getElementById('edu-polaroid-row');
+  document.getElementById('edu-overlay-label').textContent = `📷 galeri — ${year}`;
+  document.getElementById('edu-overlay-title').textContent = `Foto ${level} — ${school}`;
+
+  row.innerHTML = '';
+  photos[level].forEach((src, i) => {
+    row.innerHTML += `
+      <div class="polaroid" style="--rot:${ROT[i]};--delay:${i * 0.08}s">
+        <img src="${src}" style="width:180px;height:180px;object-fit:cover;display:block;">
+        <div class="polaroid-caption">Foto ${level} ${i+1}</div>
+      </div>`;
+  });
+
+  openOverlay('edu-overlay');
+}
+
+function openFamily() {
+  openOverlay('family-overlay');
+}
