@@ -89,14 +89,12 @@ function closeOverlay(id) {
   document.body.style.overflow = '';
 } 
 
-function openEduOverlay(level, school, year) {
-  const photos = {
-    TK:  ['assets/images/tk 1.jpeg',  'assets/images/tk 1.jpeg',  'assets/images/tk 2.jpeg'],
-    SD:  ['assets/images/sd 1.jpeg',  'assets/images/sd 1.jpeg',  'assets/images/sd 2.jpeg'],
-    SMP: ['assets/images/smp 1.jpeg', 'assets/images/smp 1.jpeg', 'assets/images/smp 2.jpeg'],
-    SMK: ['assets/images/smk 1.jpeg', 'assets/images/smk 1.jpeg', 'assets/images/smk 2.jpeg'],
-  };
- 
+const photos = {
+  TK:  ['assets/images/tk1.jpeg', 'assets/images/tk1.jpeg', 'assets/images/tk2.jpeg'],
+  SD:  ['assets/images/sd1.jpeg', 'assets/images/sd1.jpeg', 'assets/images/sd2.jpeg'],
+  SMP: ['assets/images/smp1.jpeg', 'assets/images/smp1.jpeg', 'assets/images/smp2.jpeg'],
+  SMK: ['assets/images/smk1.jpeg', 'assets/images/smk1.jpeg', 'assets/images/smk2.jpeg'],
+};
   const row = document.getElementById('edu-polaroid-row');
   document.getElementById('edu-overlay-label').textContent = `📷 galeri — ${year}`;
   document.getElementById('edu-overlay-title').textContent = `Foto ${level} — ${school}`;
