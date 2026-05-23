@@ -1002,26 +1002,6 @@ document.addEventListener('keydown', e => {
   </div>
 </footer>
 
- // ===== INTRO =====
-const introOverlay = document.getElementById('intro-overlay');
-let dismissed = false;
-
-function dismissIntro() {
-  if (dismissed) return;
-  dismissed = true;
-  introOverlay.style.transition = 'opacity 0.8s ease';
-  introOverlay.style.opacity = '0';
-  introOverlay.style.pointerEvents = 'none';
-  setTimeout(() => {
-    introOverlay.style.display = 'none';
-    document.body.style.overflow = '';
-  }, 800);
-}
-
-introOverlay.addEventListener('click', dismissIntro);
-setTimeout(dismissIntro, 5000);
-
-
 </script>
  
  

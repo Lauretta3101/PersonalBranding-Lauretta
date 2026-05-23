@@ -1,18 +1,22 @@
-// ===== SKILL BARS ANIMATION =====
 window.addEventListener('load', () => {
   document.querySelectorAll('.sbar-fill').forEach(el => {
     el.style.width = (el.dataset.w || 0) + '%';
   });
 
-  // AUTO HILANGIN INTRO (BIAR GA STUCK)
-  const intro = document.getElementById('intro');
+  // FIX INTRO
+  const intro = document.getElementById('intro-overlay');
+
   if (intro) {
     setTimeout(() => {
-      intro.style.display = 'none';
+      intro.style.opacity = '0';
+      intro.style.pointerEvents = 'none';
+
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 500);
     }, 2000);
   }
 });
-
 
 // ===== PORTFOLIO FOLDER DATA =====
 const folderData = {

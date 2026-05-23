@@ -2026,6 +2026,38 @@ body {
   border: 1px solid rgba(167,139,250,0.2);
 }
 
+.footer {
+  width: 100%;
+  padding: 50px 20px;
+  margin-top: 100px;
+  text-align: center;
+
+  background: linear-gradient(
+    to top,
+    rgba(10, 22, 40, 0.9),
+    rgba(10, 22, 40, 0.6)
+  );
+
+  border-top: 1px solid rgba(0,255,255,0.15);
+}
+
+.footer-content p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #9fb3c8;
+  letter-spacing: 0.5px;
+}
+
+.footer-content span {
+  color: #00eaff;
+  font-weight: 600;
+}
+
+.footer-sub {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
 /* ── Responsive ── */
 @media (max-width: 860px) {
   .cv-card { grid-template-columns: 1fr; }
