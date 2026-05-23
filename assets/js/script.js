@@ -109,7 +109,7 @@ const photos = {
   });
 
   openOverlay('edu-overlay');
-}
+
 
 function openFamily() {
   openOverlay('family-overlay');

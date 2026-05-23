@@ -357,27 +357,31 @@ function openOverlay(id) {
  
 /* ── Buka overlay pendidikan & generate polaroids ── */
 function openEduOverlay(level, school, year) {
-  const colors = EDU_COLORS[level] || ['#1a3a5c','#2a1a5c','#1a4a3a'];
+  const photos = {
+    TK:  ['assets/images/tk1.jpeg','assets/images/tk2.jpeg'],
+    SD:  ['assets/images/sd1.jpeg','assets/images/sd2.jpeg'],
+    SMP: ['assets/images/smp1.jpeg','assets/images/smp2.jpeg'],
+    SMK: ['assets/images/smk1.jpeg','assets/images/smk2.jpeg'],
+  };
+
   const row = document.getElementById('edu-polaroid-row');
- 
+
   document.getElementById('edu-overlay-label').textContent = `📷 galeri — ${year}`;
   document.getElementById('edu-overlay-title').textContent = `Foto ${level} — ${school}`;
- 
+
   row.innerHTML = '';
-  for (let i = 0; i < 3; i++) {
+
+  photos[level].forEach((src, i) => {
     row.innerHTML += `
       <div class="polaroid" style="--rot:${ROT[i]};--delay:${i * 0.08}s">
-        <div class="polaroid-img" style="--ph-bg:${colors[i]}">
-          ${CAM_SVG}
-          <span class="polaroid-img-label">foto-${level.toLowerCase()}-${i+1}.jpg</span>
-        </div>
+        <img src="${src}" style="width:180px;height:180px;object-fit:cover;">
         <div class="polaroid-caption">Foto ${level} ${i+1}</div>
-      </div>`;
-  }
- 
+      </div>
+    `;
+  });
+
   openOverlay('edu-overlay');
 }
- 
 /* ── Tutup overlay ── */
 function closeOverlay(id) {
   document.getElementById(id).classList.remove('active');
