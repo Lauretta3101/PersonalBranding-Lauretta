@@ -91,10 +91,10 @@ function closeOverlay(id) {
 
 function openEduOverlay(level, school, year) {
   const photos = {
-    TK:  ['assets/images/tk-1.jpeg',  'assets/images/tk 1.jpeg',  'assets/images/tk 2.jpeg'],
-    SD:  ['assets/images/sd-1.jpeg',  'assets/images/sd 1.jpeg',  'assets/images/sd 2.jpeg'],
-    SMP: ['assets/images/smp-1.jpeg', 'assets/images/smp 1.jpeg', 'assets/images/smp 2.jpeg'],
-    SMK: ['assets/images/smk-1.jpeg', 'assets/images/smk 1.jpeg', 'assets/images/smk 2.jpeg'],
+    TK:  ['assets/images/tk 1.jpeg',  'assets/images/tk 1.jpeg',  'assets/images/tk 2.jpeg'],
+    SD:  ['assets/images/sd 1.jpeg',  'assets/images/sd 1.jpeg',  'assets/images/sd 2.jpeg'],
+    SMP: ['assets/images/smp 1.jpeg', 'assets/images/smp 1.jpeg', 'assets/images/smp 2.jpeg'],
+    SMK: ['assets/images/smk 1.jpeg', 'assets/images/smk 1.jpeg', 'assets/images/smk 2.jpeg'],
   };
  
   const row = document.getElementById('edu-polaroid-row');
