@@ -1024,31 +1024,8 @@ setTimeout(dismissIntro, 5000);
 
 </script>
  
-    // ===== SKILL BARS ANIMATE ON SCROLL =====
-    const fills = document.querySelectorAll('.sbar-fill');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.width = e.target.dataset.w + '%';
-        }
-      });
-    }, { threshold: 0.3 });
-    fills.forEach(f => { f.style.width = '0'; obs.observe(f); });
  
-    // ===== NAVBAR ACTIVE =====
-    const navLinks = document.querySelectorAll('nav a');
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-      let cur = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 120) cur = s.id;
-      });
-      navLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
-      });
-    });
-  </script>
- 
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
  

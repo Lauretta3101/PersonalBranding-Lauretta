@@ -63,3 +63,15 @@ function openFolder(key) {
 function closeFolder() {
   document.getElementById('detailPanel').classList.remove('open');
 }
+// ===== NAVBAR ACTIVE =====
+const navLinks = document.querySelectorAll('nav a');
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+});
