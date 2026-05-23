@@ -136,14 +136,21 @@ function openEduOverlay(level, school, year) {
     return;
   }
 
-  photos[level].forEach((src, i) => {
-    row.innerHTML += `
-      <div class="polaroid" style="--rot:${ROT[i]};--delay:${i * 0.08}s">
-        <img src="${src}" style="width:180px;height:180px;object-fit:cover;">
-        <div class="polaroid-caption">Foto ${level} ${i+1}</div>
-      </div>
-    `;
-  });
+ const captions = {
+  TK:  ['Foto di depan kelas saat TK', 'Foto di dalam kelas saat TK'],
+  SD:  ['Foto dirumah untuk yearbook karena covid jadi di edit', 'Foto dokumentasi saat Ujian Kelulusan SD'],
+  SMP: ['Foto bersama teman saat menang ligos', 'Foto saat mau yearbook SMP dengan tema cheerful'],
+  SMK: ['Foto setelah pensi saat KBT di Ampel', 'Foto saat KBT di Ampel dengan teman teman kelas'],
+};
+
+photos[level].forEach((src, i) => {
+  row.innerHTML += `
+    <div class="polaroid" style="--rot:${ROT[i]};--delay:${i * 0.08}s">
+      <img src="${src}" style="width:180px;height:180px;object-fit:cover;">
+      <div class="polaroid-caption">${captions[level][i]}</div>
+    </div>
+  `;
+});
 
   openOverlay('edu-overlay');
 }
